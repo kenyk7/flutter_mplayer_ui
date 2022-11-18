@@ -2,6 +2,9 @@
 
 A new Flutter project.
 
+## Referencia UI
+[Dribble: Music Player UI](https://dribbble.com/shots/16855810--Music-Player-UI)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
