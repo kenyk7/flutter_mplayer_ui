@@ -23,55 +23,53 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffd1bcc9),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                const PlayerDisc(),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      margin: const EdgeInsets.only(bottom: 80),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            leading: ClipOval(
-                              child: Image.network(
-                                'https://picsum.photos/40',
-                              ),
-                            ),
-                            title: const Text('Congratulations'),
-                            subtitle: const Text('Post malone tf. Quavo'),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.all(20.0),
-                            child: Text(
-                              'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrd exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              const PlayerDisc(),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    margin: const EdgeInsets.only(bottom: 80),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          leading: ClipOval(
+                            child: Image.network(
+                              'https://picsum.photos/40',
                             ),
                           ),
-                        ],
-                      ),
+                          title: const Text('Congratulations'),
+                          subtitle: const Text('Post malone tf. Quavo'),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(20.0),
+                          child: Text(
+                            'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrd exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ],
-            ),
-            const Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: MyAppBar(),
-            ),
-            const Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: ContainerBottom(),
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+          const Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: MyAppBar(),
+          ),
+          const Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: ContainerBottom(),
+          ),
+        ],
       ),
     );
   }
@@ -85,9 +83,12 @@ class PlayerDisc extends HookWidget {
     final headerCollapse = useState(false);
     final hcValue = headerCollapse.value;
     final sw = MediaQuery.of(context).size.width;
-    final hw = hcValue ? sw : sw - 120;
-    final hh = hcValue ? 48.0 : 150.0;
-    final hPaddingTop = hcValue ? 12.0 : 90.0;
+    final paddingTopMedia = MediaQuery.of(context).padding.top;
+    final headerWidth = hcValue ? sw : 240.0;
+    final hPaddingTop = paddingTopMedia + (hcValue ? 12.0 : 32.0);
+    final hPaddingBottom = hcValue ? 12.0 : 24.0;
+    final headerRadius = hcValue ? 36.0 : 150.0;
+    final discWidth = hcValue ? 54.0 : 190.0;
     return GestureDetector(
       onVerticalDragUpdate: (dt) {
         if (dt.delta.dy < -9) {
@@ -102,19 +103,22 @@ class PlayerDisc extends HookWidget {
           children: [
             AnimatedContainer(
               duration: const Duration(milliseconds: 350),
-              width: hw,
+              width: headerWidth,
               decoration: BoxDecoration(
                 color: const Color(0xffd1bcc9),
                 borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(hh - 8),
+                  bottom: Radius.circular(headerRadius),
                 ),
               ),
               alignment: Alignment.bottomCenter,
-              padding: EdgeInsets.only(bottom: 16, top: hPaddingTop),
+              padding: EdgeInsets.only(
+                top: hPaddingTop,
+                bottom: hPaddingBottom,
+              ),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 350),
-                width: hh,
-                height: hh,
+                width: discWidth,
+                height: discWidth,
                 child: const AnimatedDisc(),
               ),
             ),
@@ -346,7 +350,7 @@ class AnimatedDisc extends HookWidget {
       turns: ctrl,
       child: ClipOval(
         child: Image.network(
-          'https://picsum.photos/150',
+          'https://picsum.photos/250',
         ),
       ),
     );

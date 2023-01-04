@@ -5,6 +5,16 @@ A new Flutter project.
 ## Referencia UI
 [Dribble: Music Player UI](https://dribbble.com/shots/16855810--Music-Player-UI)
 
+### Captura demo
+
+Online demo: https://zapp.run/edit/music-player-zu606bkv706
+
+<img
+    src="https://raw.githubusercontent.com/kenyk7/flutter_mplayer_ui/main/captures/mp-capture.jpeg"
+    alt="Img"
+    width="300"
+/>
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
